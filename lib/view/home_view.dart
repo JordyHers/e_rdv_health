@@ -1,4 +1,5 @@
 import 'package:e_rdv_health/constants/Strings.dart';
+import 'package:e_rdv_health/view/rdv_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,6 +25,13 @@ class HomePage extends StatelessWidget {
                     color: Theme.of(context).primaryColor),
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 28.0),
+            child: ElevatedButton(
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ListUserView())),
+                child: Text('Next')),
           )
         ],
       ),

@@ -3,20 +3,23 @@ class User {
   final int age;
   final String gender;
 
-  User(this.name, this.age, this.gender);
-}
+  User({this.name, this.age, this.gender});
 
-class MockData {
-  List<User> _users = [];
-
-  /// Cette ligne de code rend la liste accessible
-  List<User> get userList => _users;
-
-  Future<List<User>> createUsers() async {
-    for (int i = 0; i < 10; i++) {
-      var newUser = User('Michael', 26, 'male');
-      _users.add(newUser);
-    }
-    return _users;
+  factory User.fromJson(Map<dynamic, dynamic> json) {
+    final String name = json['name'];
+    final int age = json['age'];
+    final String gender = json['gender'];
+    return User(name: name, age: age, gender: gender);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'age': age,
+      'gender': gender,
+    };
+  }
+
+  @override
+  String toString() => ' name: $name , gender:$gender, age:$age ';
 }

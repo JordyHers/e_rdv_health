@@ -1,0 +1,36 @@
+{
+	"users": [
+		{
+			"age": 21,
+			"name": "Jordy",
+			"gender": "Male"
+		},
+		{
+			"age": 62,
+			"name": "Michael",
+			"gender": "Male"
+		},
+		{
+			"age": 43,
+			"name": "Antony",
+			"gender": "Male"
+		}
+	]	,
+	"address": [
+		{
+			"age": 21,
+			"name": "21 Street Belle Avenue",
+			"gender": "Male"
+		},
+		{
+			"age": 62,
+			"name": "Michael",
+			"gender": "Male"
+		},
+		{
+			"age": 43,
+			"name": "Antony",
+			"gender": "Male"
+		}
+	]
+}

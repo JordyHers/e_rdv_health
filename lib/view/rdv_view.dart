@@ -1,5 +1,4 @@
 import 'package:e_rdv_health/constants/Strings.dart';
-import 'package:e_rdv_health/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class ListUserView extends StatefulWidget {

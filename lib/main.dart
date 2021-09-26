@@ -1,7 +1,5 @@
-import 'package:e_rdv_health/view/home_view.dart';
+import 'package:e_rdv_health/utils/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'constants/Strings.dart';
-import 'models/user_model.dart';
 
 void main() {
   runApp(ERdv());
@@ -15,7 +13,8 @@ class ERdv extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: HomePage(title: Rd.title),
+      routes: Routes.getRoute(),
+      initialRoute: '/login_page',
     );
   }
 }

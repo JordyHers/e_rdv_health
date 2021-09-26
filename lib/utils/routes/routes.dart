@@ -18,7 +18,7 @@ class Routes {
 }
 
 class RouteNames {
-  static final String homePage = '/';
+  static final String homePage = '/home_page';
   static final String registerPage = '/register_page';
   static final String loginPage = '/login_page';
 }

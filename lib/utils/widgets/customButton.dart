@@ -1,4 +1,3 @@
-import 'package:e_rdv_health/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -10,14 +9,28 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      style: TextButton.styleFrom(primary: color),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.w400,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Ink(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: <Color>[Colors.greenAccent, Colors.blueAccent],
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          ),
+          child: Container(
+            constraints: const BoxConstraints(
+                minWidth: 88.0,
+                minHeight: 36.0), // min sizes for Material buttons
+            alignment: Alignment.center,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ),
       ),
     );

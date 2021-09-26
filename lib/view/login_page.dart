@@ -14,13 +14,13 @@ class LoginPage extends StatelessWidget {
       backgroundColor: CustomColor.background,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 50, 10, 40),
+          padding: const EdgeInsets.fromLTRB(20, 50, 20, 40),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
             children: [
-              buildAvatar(),
+              buildTop(),
               buildTextField(),
               buildCustomButton(context)
             ],
@@ -30,33 +30,52 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget buildAvatar() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 60),
-      child: CircleAvatar(
-        radius: 75,
-        backgroundColor: Colors.grey.withOpacity(0.4),
-        child: Image.network(
-          'https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png',
-          fit: BoxFit.scaleDown,
-          height: 80,
+  Widget buildCustomButton(context) {
+    return Positioned(
+      bottom: 2,
+      child: TextButton(
+        onPressed: () =>
+            Navigator.pushReplacementNamed(context, RouteNames.registerPage),
+        child: Text(
+          Rd.alreadyHaveAnAccountText,
+          style: TextStyle(
+              fontSize: 13, fontWeight: FontWeight.w500, color: Colors.red),
         ),
       ),
     );
   }
 
-  Widget buildCustomButton(context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 38.0),
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: CustomButton(
-          color: CustomColor.indigo,
-          onPressed: () =>
-              Navigator.pushReplacementNamed(context, RouteNames.registerPage),
-          text: Rd.alreadyHaveAnAccountText,
+  Widget buildTop() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 80),
+        Image.asset(
+          'assets/images/logo.png',
+          height: 50,
         ),
-      ),
+        SizedBox(height: 10),
+        Text(
+          'Hello There',
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
+        ),
+        SizedBox(height: 40),
+        Text(
+          'Welcome',
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
+              color: Colors.grey.shade600),
+        ),
+        Text(
+          'Helps the user schedule appointements with different clinics.',
+          style: TextStyle(
+              fontWeight: FontWeight.w200,
+              fontSize: 13,
+              color: Colors.grey.shade400),
+        )
+      ],
     );
   }
 }
@@ -64,6 +83,8 @@ class LoginPage extends StatelessWidget {
 Widget buildTextField() {
   return Padding(
     padding: const EdgeInsets.only(top: 28.0),
-    child: LoginFields(type: 'login', isLoading: false),
+    child: LoginFields(
+      type: 'login',
+    ),
   );
 }

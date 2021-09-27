@@ -1,3 +1,4 @@
+import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/utils/theme/theme.dart';
 import 'package:e_rdv_health/utils/widgets/login_fields_component.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class RegisterPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 28.0),
       child: LoginFields(
-        type: 'register',
+        type: Rd.registerText,
       ),
     );
   }

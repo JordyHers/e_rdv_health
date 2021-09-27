@@ -1,14 +1,21 @@
 class Rd {
   static final title = 'E - RDV';
 
-  static final String inValidEmailErrorText = "Email can't be empty";
-  static final String inValidPasswordErrorText = "Password can't be empty";
-  static final String inValidNameErrorText = "Name can't be empty";
-  static final String inValidSurnameErrorText = "Surname can't be empty";
-  static final String signInFailedText = 'Sign in Failed';
-  static final String signInButtonText = 'Sign In';
-  static final String createAccountButtonText = 'Create Account';
-  static final String alreadyHaveAnAccountText = 'I already have an account';
-  static final String dontHaveAnAccountText = "I don't have an account";
-  static final String registerText = 'register';
+  static final String inValidEmailErrorText = "Email ne peut etre vide";
+  static final String inValidPasswordErrorText =
+      "Mot de passe ne peut etre vide";
+  static final String inValidNameErrorText = "Prenom ne peut etre vide";
+  static final String inValidSurnameErrorText = "Nom ne peut etre vide";
+  static final String signInFailedText = 'Echec de la connexion';
+  static final String signInButtonText = 'Se Connecter';
+  static final String createAccountButtonText = 'Creer un compte';
+  static final String alreadyHaveAnAccountText = "J'ai deja un compte";
+  static final String dontHaveAnAccountText = " Je n'ai pas de compte";
+  static final String registerText = 'Creer un Compte';
+
+  ///UI Strings
+  static final String helloText = 'Salut';
+  static final String welcomeText = 'Bienvenue';
+  static final String descriptionText =
+      'Cet application vous permet de vous connecter a votre base de donnees';
 }

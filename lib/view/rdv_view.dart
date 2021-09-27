@@ -1,4 +1,5 @@
 import 'package:e_rdv_health/constants/Strings.dart';
+import 'package:e_rdv_health/utils/widgets/custom_appBar.dart';
 import 'package:flutter/material.dart';
 
 class ListUserView extends StatefulWidget {
@@ -19,18 +20,24 @@ class _ListUserViewState extends State<ListUserView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(Rd.title),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomAppBar(Rd.title),
+          Flexible(
+            child: ListView.builder(
+                itemCount: _data.length,
+                itemBuilder: (context, index) => ListTile(
+                      title: Text(_data[index]['name'],
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent)),
+                    )),
+          ),
+        ],
       ),
-      body: ListView.builder(
-          itemCount: _data.length,
-          itemBuilder: (context, index) => ListTile(
-                title: Text(_data[index]['name'],
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor)),
-              )),
     );
   }
 }

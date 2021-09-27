@@ -31,23 +31,20 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget buildCustomButton(context) {
-    return Positioned(
-      bottom: 2,
-      child: TextButton(
-        onPressed: () =>
-            Navigator.pushReplacementNamed(context, RouteNames.registerPage),
-        child: Text(
-          Rd.alreadyHaveAnAccountText,
-          style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w500, color: Colors.red),
-        ),
+    return TextButton(
+      onPressed: () =>
+          Navigator.pushReplacementNamed(context, RouteNames.registerPage),
+      child: Text(
+        Rd.dontHaveAnAccountText,
+        style: TextStyle(
+            fontSize: 13, fontWeight: FontWeight.w500, color: Colors.red),
       ),
     );
   }
 
   Widget buildTop() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 80),
@@ -57,19 +54,20 @@ class LoginPage extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Hello There',
+          Rd.welcomeText,
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
         ),
         SizedBox(height: 40),
         Text(
-          'Welcome',
+          Rd.helloText,
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 25,
               color: Colors.grey.shade600),
         ),
+        SizedBox(height: 10),
         Text(
-          'Helps the user schedule appointements with different clinics.',
+          Rd.descriptionText,
           style: TextStyle(
               fontWeight: FontWeight.w200,
               fontSize: 13,

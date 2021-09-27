@@ -55,7 +55,7 @@ class _LoginFieldsState extends State<LoginFields> {
                 }
               },
               decoration: InputDecoration(
-                labelText: 'Name',
+                labelText: 'Nom',
                 errorText: _nameController.text.isEmpty && isValid == false
                     ? Rd.inValidNameErrorText
                     : null,
@@ -74,7 +74,7 @@ class _LoginFieldsState extends State<LoginFields> {
                 }
               },
               decoration: InputDecoration(
-                labelText: 'Surname',
+                labelText: 'Prenom',
                 errorText: _surnameController.text.isEmpty && isValid == false
                     ? Rd.inValidSurnameErrorText
                     : null,
@@ -87,7 +87,7 @@ class _LoginFieldsState extends State<LoginFields> {
       SizedBox(height: 20.0),
       CustomButton(
         onPressed: () {
-          if (widget.type == 'register') {
+          if (widget.type == Rd.registerText) {
             if (_nameController.text.isNotEmpty &&
                 _surnameController.text.isNotEmpty &&
                 _emailController.text.isNotEmpty &&
@@ -113,13 +113,13 @@ class _LoginFieldsState extends State<LoginFields> {
             }
           }
         },
-        text: widget.type == 'register'
+        text: widget.type == Rd.registerText
             ? Rd.createAccountButtonText
             : Rd.signInButtonText,
       ),
       SizedBox(height: 8.0),
       Visibility(
-        visible: !isLoading && widget.type == 'register' ? true : false,
+        visible: !isLoading && widget.type == Rd.registerText ? true : false,
         child: TextButton(
           onPressed: () =>
               Navigator.pushReplacementNamed(context, RouteNames.loginPage),
@@ -141,7 +141,7 @@ class _LoginFieldsState extends State<LoginFields> {
       controller: _emailController,
       decoration: InputDecoration(
           labelText: 'Email',
-          hintText: 'test@test.com',
+          hintText: 'patient@hopital.com',
           errorText: _emailController.text.isEmpty && isValid == false
               ? Rd.inValidEmailErrorText
               : null,
@@ -159,7 +159,7 @@ class _LoginFieldsState extends State<LoginFields> {
       focusNode: _passwordFocusNode,
       controller: _passwordController,
       decoration: InputDecoration(
-          labelText: 'Password',
+          labelText: 'Mot de passe',
           errorText: _passwordController.text.isEmpty && isValid == false
               ? Rd.inValidEmailErrorText
               : null,

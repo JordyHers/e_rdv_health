@@ -9,9 +9,10 @@ class ERdv extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.lightGreen,
       ),
       routes: Routes.getRoute(),
       initialRoute: RouteNames.loginPage,

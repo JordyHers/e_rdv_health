@@ -1,5 +1,6 @@
 import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/utils/routes/routes.dart';
+import 'package:e_rdv_health/utils/widgets/customTextField.dart';
 import 'package:flutter/material.dart';
 
 import 'customButton.dart';
@@ -13,12 +14,12 @@ class LoginFields extends StatefulWidget {
 }
 
 class _LoginFieldsState extends State<LoginFields> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
 
-  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _phoneFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _surnameFocusNode = FocusNode();
@@ -28,12 +29,12 @@ class _LoginFieldsState extends State<LoginFields> {
   ///void Dispose Method
   @override
   void dispose() {
-    _emailController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
     _surnameController.dispose();
 
-    _emailFocusNode.dispose();
+    _phoneFocusNode.dispose();
     _passwordFocusNode.dispose();
     _nameFocusNode.dispose();
     _surnameFocusNode.dispose();
@@ -44,45 +45,33 @@ class _LoginFieldsState extends State<LoginFields> {
   List<Widget> _buildChildren() {
     return [
       widget.type == Rd.registerText
-          ? TextField(
+          ? CustomTextField(
               focusNode: _nameFocusNode,
+              nextFocusNode: _surnameFocusNode,
               controller: _nameController,
-              textInputAction: TextInputAction.next,
-              // onChanged: (name) => print(name),
-              onEditingComplete: () {
-                if (_nameController.text.isNotEmpty) {
-                  FocusScope.of(context).requestFocus(_surnameFocusNode);
-                }
-              },
-              decoration: InputDecoration(
-                labelText: 'Nom',
-                errorText: _nameController.text.isEmpty && isValid == false
-                    ? Rd.inValidNameErrorText
-                    : null,
-                enabled: isLoading == false,
-              ))
+              isValid: isValid,
+              isLoading: isLoading,
+              label: 'Nom',
+              icon: Icons.account_circle_rounded,
+              errorText: Rd.inValidNameErrorText,
+            )
           : Opacity(opacity: 0),
+      SizedBox(height: 10),
       widget.type == Rd.registerText
-          ? TextField(
+          ? CustomTextField(
               focusNode: _surnameFocusNode,
+              nextFocusNode: _phoneFocusNode,
               controller: _surnameController,
-              textInputAction: TextInputAction.next,
-              // onChanged: (surname) => print(surname),
-              onEditingComplete: () {
-                if (_surnameController.text.isNotEmpty) {
-                  FocusScope.of(context).requestFocus(_emailFocusNode);
-                }
-              },
-              decoration: InputDecoration(
-                labelText: 'Prenom',
-                errorText: _surnameController.text.isEmpty && isValid == false
-                    ? Rd.inValidSurnameErrorText
-                    : null,
-                enabled: isLoading == false,
-              ))
+              isValid: isValid,
+              isLoading: isLoading,
+              label: 'Prenom',
+              icon: Icons.account_circle_rounded,
+              errorText: Rd.inValidSurnameErrorText,
+            )
           : Opacity(opacity: 0),
-      _buildEmailTextField(),
-      SizedBox(height: 8.0),
+      SizedBox(height: 10),
+      _buildPhoneTextField(),
+      SizedBox(height: 10.0),
       _buildPasswordTextField(),
       SizedBox(height: 20.0),
       CustomButton(
@@ -90,10 +79,10 @@ class _LoginFieldsState extends State<LoginFields> {
           if (widget.type == Rd.registerText) {
             if (_nameController.text.isNotEmpty &&
                 _surnameController.text.isNotEmpty &&
-                _emailController.text.isNotEmpty &&
+                _phoneController.text.isNotEmpty &&
                 _passwordController.text.isNotEmpty) {
               print('The user is ready to be saved in the database as :'
-                  ' Name ${_nameController.text}, Surname : ${_surnameController.text} ,Email: ${_emailController.text} ,');
+                  ' Name ${_nameController.text}, Surname : ${_surnameController.text} ,Email: ${_phoneController.text} ,');
               Navigator.pushReplacementNamed(context, RouteNames.homePage);
             } else {
               setState(() {
@@ -101,11 +90,11 @@ class _LoginFieldsState extends State<LoginFields> {
               });
             }
           } else {
-            if (_emailController.text.isNotEmpty &&
+            if (_phoneController.text.isNotEmpty &&
                 _passwordController.text.isNotEmpty) {
               Navigator.pushReplacementNamed(context, RouteNames.homePage);
               print('The user is already saved in the database as :'
-                  ' Email: ${_emailController.text} ,');
+                  ' Email: ${_phoneController.text} ,');
             } else {
               setState(() {
                 isValid = false;
@@ -135,39 +124,32 @@ class _LoginFieldsState extends State<LoginFields> {
 
   ///------------------------------ Widgets -------------------------------------------------
 
-  Widget _buildEmailTextField() {
-    return TextField(
-      focusNode: _emailFocusNode,
-      controller: _emailController,
-      decoration: InputDecoration(
-          labelText: 'Email',
-          hintText: 'patient@hopital.com',
-          errorText: _emailController.text.isEmpty && isValid == false
-              ? Rd.inValidEmailErrorText
-              : null,
-          enabled: isLoading == false),
-      autocorrect: false,
-      keyboardType: TextInputType.emailAddress,
-      textInputAction: TextInputAction.next,
-      //  onEditingComplete: () => print('$_emailController, $_nameController'),
-      // onChanged: (email) => print('$_emailController, '),
+  Widget _buildPhoneTextField() {
+    return CustomTextField(
+      focusNode: _phoneFocusNode,
+      nextFocusNode: _passwordFocusNode,
+      controller: _phoneController,
+      isValid: isValid,
+      isLoading: isLoading,
+      label: 'Numero',
+      hintText: '+241 XXXXXX',
+      phone: true,
+      icon: Icons.phone,
+      errorText: Rd.inValidPhoneErrorText,
     );
   }
 
   Widget _buildPasswordTextField() {
-    return TextField(
+    return CustomTextField(
       focusNode: _passwordFocusNode,
+      // nextFocusNode: _passwordFocusNode,
       controller: _passwordController,
-      decoration: InputDecoration(
-          labelText: 'Mot de passe',
-          errorText: _passwordController.text.isEmpty && isValid == false
-              ? Rd.inValidEmailErrorText
-              : null,
-          enabled: isLoading == false),
-      obscureText: true,
-      textInputAction: TextInputAction.done,
-      //  onEditingComplete: () => print('$_emailController, $_nameController'),
-      // onChanged: (password) => print('$_passwordController,'),
+      isValid: isValid,
+      isLoading: isLoading,
+      label: 'Mot de passe',
+      icon: Icons.lock,
+      password: true,
+      errorText: Rd.inValidPasswordErrorText,
     );
   }
 

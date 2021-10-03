@@ -1,7 +1,8 @@
 class Rd {
   static final title = 'E - RDV';
 
-  static final String inValidEmailErrorText = "Email ne peut etre vide";
+  static final String inValidPhoneErrorText =
+      "Numero de telephone ne peut etre vide";
   static final String inValidPasswordErrorText =
       "Mot de passe ne peut etre vide";
   static final String inValidNameErrorText = "Prenom ne peut etre vide";

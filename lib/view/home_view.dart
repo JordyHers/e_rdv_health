@@ -6,8 +6,6 @@ import 'package:e_rdv_health/view/rdv_view.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-
 class HomePage extends StatefulWidget {
   final String title;
   HomePage({Key key, this.title}) : super(key: key);
@@ -17,49 +15,102 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List users = [];
-
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/data.json');
-    final data = await json.decode(response);
-    var user = data['users'].map((element) => User.fromJson(element));
-    users = data['users'];
-    print(user.toString());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomAppBar(Rd.title),
-          Center(
-            child: Container(
-              child: Text(
-                "Page d'acceuil",
-                style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent),
-              ),
-            ),
-          ),
-          Padding(
-              padding: const EdgeInsets.only(bottom: 60.0),
-              child: CustomButton(
-                /*onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ListUserView())),*/
-                onPressed: () async {
-                  await readJson();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListUserView(users: users)));
-                },
-                text: 'Next',
-              ))
+      drawer: Drawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.notifications_active),
+              onPressed: () => print('Notification pressed'))
         ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ListUserView()));
+                print('OBTENEZ UN RDV');
+              },
+              child: Card(
+                  child: Container(
+                color: Colors.lightGreenAccent,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                height: 100,
+                width: 370,
+                child: Center(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Obtenez un ',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'rendez-vous',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Image.asset(
+                      'assets/images/appointment.png',
+                      height: 220,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                )),
+              )),
+            ),
+            InkWell(
+              onTap: () {
+                print('CONSULTEZ LA LISTE');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ListUserView()));
+              },
+              child: Card(
+                  child: Container(
+                decoration: BoxDecoration(color: Colors.lightGreenAccent),
+                height: 100,
+                width: 370,
+                child: Center(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Consultez la liste',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'de Rendez-vous',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Image.asset(
+                      'assets/images/appointment.png',
+                      height: 220,
+                      fit: BoxFit.contain,
+                    ),
+                  ],
+                )),
+              )),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -18,13 +18,22 @@ class _LoginFieldsState extends State<LoginFields> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _surnameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _profileController = TextEditingController();
 
   final FocusNode _phoneFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _surnameFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _addressFocusNode = FocusNode();
+  final FocusNode _profileFocusNode = FocusNode();
+
   bool isValid = true;
   bool isLoading = false;
+
+  String gender = 'Homme';
 
   ///void Dispose Method
   @override
@@ -33,16 +42,22 @@ class _LoginFieldsState extends State<LoginFields> {
     _passwordController.dispose();
     _nameController.dispose();
     _surnameController.dispose();
+    _emailController.dispose();
+    _addressController.dispose();
+    _profileController.dispose();
 
     _phoneFocusNode.dispose();
     _passwordFocusNode.dispose();
     _nameFocusNode.dispose();
     _surnameFocusNode.dispose();
+    _emailFocusNode.dispose();
+    _addressFocusNode.dispose();
+    _profileFocusNode.dispose();
 
     super.dispose();
   }
 
-  List<Widget> _buildChildren() {
+  List<Widget> _buildChildren(context) {
     return [
       widget.type == Rd.registerText
           ? CustomTextField(
@@ -60,7 +75,7 @@ class _LoginFieldsState extends State<LoginFields> {
       widget.type == Rd.registerText
           ? CustomTextField(
               focusNode: _surnameFocusNode,
-              nextFocusNode: _phoneFocusNode,
+              nextFocusNode: _emailFocusNode,
               controller: _surnameController,
               isValid: isValid,
               isLoading: isLoading,
@@ -70,20 +85,64 @@ class _LoginFieldsState extends State<LoginFields> {
             )
           : Opacity(opacity: 0),
       SizedBox(height: 10),
+      widget.type == Rd.registerText
+          ? CustomTextField(
+              focusNode: _emailFocusNode,
+              nextFocusNode: _profileFocusNode,
+              controller: _emailController,
+              isValid: isValid,
+              isLoading: isLoading,
+              label: 'Email',
+              icon: Icons.alternate_email,
+              errorText: Rd.inValidEmailErrorText,
+            )
+          : Opacity(opacity: 0),
+      SizedBox(height: 10),
       _buildPhoneTextField(),
       SizedBox(height: 10.0),
       _buildPasswordTextField(),
+      SizedBox(height: 10),
+      widget.type == Rd.registerText
+          ? DropdownButton<String>(
+              isExpanded: true,
+              value: gender,
+              icon: const Icon(Icons.arrow_downward),
+              iconSize: 21,
+              elevation: 16,
+              style: const TextStyle(color: Colors.grey),
+              underline: Container(
+                height: 2,
+                color: Colors.lightGreen,
+              ),
+              onChanged: (newValue) {
+                setState(() {
+                  gender = newValue;
+                });
+              },
+              items: <String>[
+                'Homme',
+                'Femme',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            )
+          : Opacity(opacity: 0),
       SizedBox(height: 20.0),
       CustomButton(
-        onPressed: () {
+        onPressed: () async {
           if (widget.type == Rd.registerText) {
             if (_nameController.text.isNotEmpty &&
                 _surnameController.text.isNotEmpty &&
                 _phoneController.text.isNotEmpty &&
-                _passwordController.text.isNotEmpty) {
+                _passwordController.text.isNotEmpty &&
+                _emailController.text.isNotEmpty) {
               print('The user is ready to be saved in the database as :'
                   ' Name ${_nameController.text}, Surname : ${_surnameController.text} ,Email: ${_phoneController.text} ,');
-              Navigator.pushReplacementNamed(context, RouteNames.homePage);
+              // Navigator.pushReplacementNamed(context, RouteNames.homePage);
+              await _buildAlertDialog(context);
             } else {
               setState(() {
                 isValid = false;
@@ -153,6 +212,25 @@ class _LoginFieldsState extends State<LoginFields> {
     );
   }
 
+  _buildAlertDialog(context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enregistrement reussi'),
+          content: Text("Retourner a la page de connexion"),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, RouteNames.loginPage),
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -162,7 +240,7 @@ class _LoginFieldsState extends State<LoginFields> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: _buildChildren(),
+        children: _buildChildren(context),
       ),
     )));
   }

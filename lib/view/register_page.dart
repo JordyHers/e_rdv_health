@@ -12,13 +12,13 @@ class RegisterPage extends StatelessWidget {
       backgroundColor: CustomColor.background,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 50, 10, 40),
+          padding: const EdgeInsets.fromLTRB(10, 50, 10, 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
             children: [
-              buildAvatar(),
+              buildHeader(),
               buildTextField(),
             ],
           ),
@@ -27,17 +27,24 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget buildAvatar() {
+  Widget buildHeader() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 60),
-      child: CircleAvatar(
-        radius: 75,
-        backgroundColor: Colors.grey.withOpacity(0.4),
-        child: Image.network(
-          'https://www.seekpng.com/png/full/847-8474751_download-empty-profile.png',
-          fit: BoxFit.scaleDown,
-          height: 80,
-        ),
+      padding: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Creer votre',
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
+          ),
+          Text(
+            'compte',
+            style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.w900,
+                color: Colors.lightGreen),
+          ),
+        ],
       ),
     );
   }

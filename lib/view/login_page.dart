@@ -55,15 +55,20 @@ class LoginPage extends StatelessWidget {
         SizedBox(height: 10),
         Text(
           Rd.welcomeText,
-          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
+          style: TextStyle(fontSize: 35, fontWeight: FontWeight.w900),
         ),
-        SizedBox(height: 40),
+        Text(
+          'E-RDV',
+          style: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.w900,
+              color: Colors.lightGreen),
+        ),
+        SizedBox(height: 30),
         Text(
           Rd.helloText,
           style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 25,
-              color: Colors.grey.shade600),
+              fontWeight: FontWeight.w500, fontSize: 25, color: Colors.grey),
         ),
         SizedBox(height: 10),
         Text(

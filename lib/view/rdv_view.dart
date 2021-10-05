@@ -46,8 +46,8 @@ class _ListUserViewState extends State<ListUserView> {
             elevation: 16,
             style: const TextStyle(color: Colors.grey),
             underline: Container(
-              height: 2,
-              color: Colors.lightGreen,
+              height: 1,
+              color: Colors.black12,
             ),
             onChanged: (newValue) {
               setState(() {
@@ -76,8 +76,8 @@ class _ListUserViewState extends State<ListUserView> {
             elevation: 16,
             style: const TextStyle(color: Colors.grey),
             underline: Container(
-              height: 2,
-              color: Colors.lightGreen,
+              height: 1,
+              color: Colors.black12,
             ),
             onChanged: (newValue) {
               setState(() {

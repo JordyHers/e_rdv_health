@@ -10,12 +10,14 @@ class ERdv extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'E-RDV',
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
-      ),
+          primaryColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          )),
       routes: Routes.getRoute(),
-      initialRoute: RouteNames.homePage,
+      initialRoute: RouteNames.loginPage,
     );
   }
 }

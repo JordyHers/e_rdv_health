@@ -112,7 +112,7 @@ class _LoginFieldsState extends State<LoginFields> {
               style: const TextStyle(color: Colors.grey),
               underline: Container(
                 height: 2,
-                color: Colors.lightGreen,
+                color: Colors.black,
               ),
               onChanged: (newValue) {
                 setState(() {

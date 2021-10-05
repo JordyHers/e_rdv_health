@@ -69,23 +69,22 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   buildCard(context, width, height, 'Obtenez un ',
-                      'Rendez-vous', 'hand'),
+                      'Rendez-vous', 'hand',RouteNames.rdvFormPage),
                   buildCard(context, width, height, 'Consultez la liste',
-                      'de Rendez-vous', 'appointment'),
+                      'de Rendez-vous', 'appointment',RouteNames.rdvListPage),
                 ])));
   }
 
   Widget buildCard(
-      BuildContext context, width, height, title, subtitle, image) {
+      BuildContext context, width, height, title, subtitle, image,routeName) {
     double fontSize(double size) {
       return size * width / 414;
     }
 
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ListUserView()));
-        print('OBTENEZ UN RDV');
+        Navigator.pushNamed(context, routeName);
+        print('$title  $subtitle');
       },
       child: Card(
           child: Container(

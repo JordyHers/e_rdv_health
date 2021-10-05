@@ -1,6 +1,8 @@
 import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/view/home_view.dart';
 import 'package:e_rdv_health/view/login_page.dart';
+import 'package:e_rdv_health/view/rdv_list_view.dart';
+import 'package:e_rdv_health/view/rdv_view.dart';
 import 'package:e_rdv_health/view/register_page.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -13,6 +15,8 @@ class Routes {
       RouteNames.homePage: (_) => HomePage(title: Rd.title),
       RouteNames.registerPage: (_) => RegisterPage(),
       RouteNames.loginPage: (_) => LoginPage(),
+      RouteNames.rdvListPage: (_) => RdvView(),
+      RouteNames.rdvFormPage: (_) => RdvForm(),
     };
   }
 }
@@ -21,4 +25,6 @@ class RouteNames {
   static final String homePage = '/home_page';
   static final String registerPage = '/register_page';
   static final String loginPage = '/login_page';
+  static final String rdvListPage = '/rdv_list_view';
+  static final String rdvFormPage = '/rdv_view';
 }

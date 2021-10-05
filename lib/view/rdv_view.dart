@@ -3,16 +3,16 @@ import 'package:e_rdv_health/utils/widgets/customTextField.dart';
 import 'package:e_rdv_health/utils/widgets/custom_appBar.dart';
 import 'package:flutter/material.dart';
 
-class ListUserView extends StatefulWidget {
-  ListUserView({
+class RdvForm extends StatefulWidget {
+  RdvForm({
     Key key,
   }) : super(key: key);
 
   @override
-  _ListUserViewState createState() => _ListUserViewState();
+  _RdvFormState createState() => _RdvFormState();
 }
 
-class _ListUserViewState extends State<ListUserView> {
+class _RdvFormState extends State<RdvForm> {
   String clinic = 'SOS MEDECIN';
   String branch = 'MEDECIN GENERALISTE';
 

@@ -34,11 +34,14 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       focusNode: focusNode,
       controller: controller,
-      textInputAction: TextInputAction.next,
+      textInputAction: password == true ? TextInputAction.done: TextInputAction.next,
       // onChanged: (name) => print(name),
       onEditingComplete: () {
-        if (controller.text.isNotEmpty) {
+        if (controller.text.isEmpty ) {
           FocusScope.of(context).requestFocus(nextFocusNode);
+        } else {
+          FocusScope.of(context).requestFocus(nextFocusNode);
+          FocusScope.of(context).unfocus();
         }
       },
       decoration: InputDecoration(

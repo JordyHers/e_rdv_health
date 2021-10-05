@@ -1,6 +1,7 @@
 import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/models/user_model.dart';
 import 'package:e_rdv_health/utils/config/size_config.dart';
+import 'package:e_rdv_health/utils/routes/routes.dart';
 import 'package:e_rdv_health/utils/widgets/customButton.dart';
 import 'package:e_rdv_health/utils/widgets/custom_appBar.dart';
 import 'package:e_rdv_health/view/rdv_view.dart';
@@ -22,7 +23,36 @@ class _HomePageState extends State<HomePage> {
     var width = SizeConfig.getWidth(context);
 
     return Scaffold(
-        drawer: Drawer(),
+        drawer: Drawer(
+            elevation: 2,
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.space,
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: DrawerHeader(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black12,
+                      foregroundColor: Colors.black,
+                      radius: 35,
+                      child: Icon(Icons.person),
+                    ),
+                  ),
+                ),
+                Flexible(
+                    flex: 1,
+                    child: ListTile(
+                      trailing: Icon(Icons.logout),
+                      title: TextButton(
+                          onPressed: () => Navigator.of(context)
+                              .pushReplacementNamed(RouteNames.loginPage),
+                          child: Text(
+                            'Se déconnecter',
+                            style: TextStyle(color: Colors.black26),
+                          )),
+                    )),
+              ],
+            )),
         appBar: AppBar(
           backgroundColor: Colors.white,
           actions: [

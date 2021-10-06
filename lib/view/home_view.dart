@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.topRight,
                     child: Container(
                         alignment: Alignment.topRight,
-                        width: width / 1.8,
+                        width: width / 3.8,
                         child: Image.asset(
                           "assets/images/$image.png",
                           fit: BoxFit.contain,

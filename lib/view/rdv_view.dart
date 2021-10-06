@@ -1,3 +1,5 @@
+import 'package:e_rdv_health/constants/Strings.dart';
+import 'package:e_rdv_health/utils/exceptions/error_widget.dart';
 import 'package:e_rdv_health/utils/widgets/customButton.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,7 @@ class _RdvFormState extends State<RdvForm> {
   int hour;
   int min;
   TimeOfDay _time ;
-  bool isTimeChosen = false;
+  bool isSubmit =false;
 
   void _selectTime() async {
     final TimeOfDay newTime = await showTimePicker(
@@ -55,7 +57,7 @@ class _RdvFormState extends State<RdvForm> {
         ],
         actionsIconTheme: IconThemeData(color: Colors.black),
       ),
-      body: Container(
+      body: isSubmit == false ? Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -139,14 +141,14 @@ class _RdvFormState extends State<RdvForm> {
                       onTap: (){
                         setState(() {
                           value = hours[index];
-                          isTimeChosen = !isTimeChosen;
+
                         });
                         print('Card tapped');
                       },
                       child: Card(
                       elevation:10,
                       child: Container(
-                        color:  Colors.blueGrey.shade50,
+                        color:  Colors.grey.shade50,
                         height: 55,
                         child: Center(
                           child: Text(hours[index],style: TextStyle(fontSize: 15,fontWeight: FontWeight.w400),),
@@ -157,15 +159,80 @@ class _RdvFormState extends State<RdvForm> {
                   )],
               ),
             ),
-            SizedBox(height: 30),
-            Text('Vos Heures', style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-            value != null ? Text(value,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 13,letterSpacing: 2,color: Colors.red)): Opacity(opacity: 0),
-            SizedBox(height:80),
-            CustomButton(text: 'Valider',)
+            value != null ?  Center(
+              child: Container(
+                height: 185,
+                width: 265,
+                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 15),
+                child: Card(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Horaire: $value',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 13,letterSpacing: 1,color: Colors.red)),
+                      SizedBox(height: 5),
+                      Text('Clinique: $clinic',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 13,letterSpacing: 1,color: Colors.indigo)),
+                      SizedBox(height: 5),
+                      Text('Spécialité: $branch',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 13,color: Colors.indigo)),
 
+                    ],
+                  ),
+                ),
+              ),
+            ): Opacity(opacity: 0),
+
+            CustomButton(text: 'Confirmer',onPressed: (){
+                setState(() {
+                  _submit();
+                });},)
           ],
         ),
-      ),
+      ) : buildContainer(),
+    );
+  }
+
+ _submit() {
+    isSubmit = !isSubmit;
+  }
+}
+
+class buildContainer extends StatelessWidget {
+  const buildContainer({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return FutureBuilder(
+      future: Future.delayed(Duration(seconds: 4)),
+      builder: (BuildContext context,  snapshot) {  // AsyncSnapshot<Your object type>
+        if( snapshot.connectionState == ConnectionState.waiting){
+          return  Center(
+            child: Container(
+              height:MediaQuery.of(context).size.height,
+              width:MediaQuery.of(context).size.width,
+              color: Colors.black.withOpacity(0.6) ,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Connexion à la base de données...',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15),),
+                  SizedBox(height: 20),
+                  CircularProgressIndicator(backgroundColor: Colors.black,),
+                ],
+              ),
+            ),
+          );
+        }else{
+          if (snapshot.hasError)
+            return Center(child: Text('Erreur: ${snapshot.error}'));
+          else
+            return CustomErrorWidget(text: Rd.noDatabaseText);
+        }
+      },
+
+
+
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:e_rdv_health/constants/Strings.dart';
+import 'package:e_rdv_health/utils/exceptions/error_widget.dart';
 import 'package:flutter/material.dart';
 
 class RdvView extends StatelessWidget {
@@ -20,28 +22,32 @@ class RdvView extends StatelessWidget {
     builder: (BuildContext context,  snapshot) {  // AsyncSnapshot<Your object type>
       if( snapshot.connectionState == ConnectionState.waiting){
         return  Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Veuillez patientez ...',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15),),
-              SizedBox(height: 20),
-              CircularProgressIndicator(backgroundColor: Colors.black,),
-            ],
+          child: Container(
+            height:MediaQuery.of(context).size.height,
+            width:MediaQuery.of(context).size.width,
+            color: Colors.black.withOpacity(0.6) ,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Veuillez patientez ...',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15),),
+                SizedBox(height: 20),
+                CircularProgressIndicator(backgroundColor: Colors.black,),
+              ],
+            ),
           ),
         );
       }else{
         if (snapshot.hasError)
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('Erreur: ${snapshot.error}'));
         else
-          return Center(
-            child: Text('Vous n\'avez pas de Rendez-vous !',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15),),
-          );
+          return CustomErrorWidget(text: Rd.noAppointmentText);
       }
     },
 
 
-
   );
 }
+
+
 

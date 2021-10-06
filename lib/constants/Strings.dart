@@ -20,6 +20,9 @@ class Rd {
   ///UI Strings
   static final String helloText = 'Salut';
   static final String welcomeText = 'Bienvenue';
+  static final String noAppointmentText = "Vous n'avez pas de Rendez-vous !";
+  static final String noDatabaseText = "Aucune base de données n'a été trouvée.";
   static final String descriptionText =
       'Cet application vous permet de vous connecter a votre base de donnees';
+
 }

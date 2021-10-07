@@ -1,4 +1,5 @@
 import 'package:e_rdv_health/constants/Strings.dart';
+import 'package:e_rdv_health/utils/config/size_config.dart';
 import 'package:e_rdv_health/utils/exceptions/error_widget.dart';
 import 'package:e_rdv_health/utils/widgets/customButton.dart';
 import 'package:flutter/material.dart';
@@ -17,34 +18,18 @@ class _RdvFormState extends State<RdvForm> {
   String value ;
   String clinic = 'SOS MEDECIN';
   String branch = 'MEDECIN GENERALISTE';
-  List<String> branches =['MEDECIN GENERALISTE', 'CARDIOLOGIE', 'GYNECOLOGIE'];
-  List<String> hours = ['8:00 - 9:00','10:00 - 11:00','12:00 - 13:00','14:00 - 15:00','16:00 - 17:00'];
+  List <String> clinics = ['SOS MEDECIN', 'JEANNE EBORI', 'CHU-ANGONDJE','HOPITAL MILITAIRE','CHL'];
 
-  int hour;
-  int min;
-  TimeOfDay _time ;
+  List<String> branches =['MEDECIN GENERALISTE', 'CARDIOLOGIE', 'GYNECOLOGIE','HEMATOLOGIE','DERMATOLOGIE','UROLOGIE'];
+  List<String> hours = ['8:00 - 9:00','10:00 - 11:00','12:00 - 13:00','14:00 - 15:00','16:00 - 17:00'];
   bool isSubmit =false;
 
-  void _selectTime() async {
-    final TimeOfDay newTime = await showTimePicker(
-      context: context,
-      initialTime: _time,
-
-    );
-    if (newTime != null) {
-      setState(() {
-        _time = newTime;
-      });
-    }
-  }
 
   //TODO: FETCH THE DATA OF THE CLINIC FROM API and PARSE JSON
   @override
   void initState() {
     super.initState();
-    min = DateTime.now().minute;
-    hour = DateTime.now().hour;
-    _time = TimeOfDay(hour: 24, minute: 60);
+
   }
 
   @override
@@ -53,7 +38,8 @@ class _RdvFormState extends State<RdvForm> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         actions: [
-          IconButton(icon: Icon(Icons.settings))
+          IconButton(icon: Icon(Icons.settings),
+          onPressed:()=> print('Setting Button Pressed ...'),)
         ],
         actionsIconTheme: IconThemeData(color: Colors.black),
       ),
@@ -86,8 +72,7 @@ class _RdvFormState extends State<RdvForm> {
                   clinic = newValue;
                 });
               },
-              items: <String>['SOS MEDECIN', 'JEANNE EBORI', 'CHU-ANGONDJE']
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: clinics.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -209,8 +194,8 @@ class buildContainer extends StatelessWidget {
         if( snapshot.connectionState == ConnectionState.waiting){
           return  Center(
             child: Container(
-              height:MediaQuery.of(context).size.height,
-              width:MediaQuery.of(context).size.width,
+              height:SizeConfig.getHeight(context),
+              width:SizeConfig.getWidth(context),
               color: Colors.black.withOpacity(0.6) ,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'customButton.dart';
 
 class LoginFields extends StatefulWidget {
-  const LoginFields({Key key, this.type}) : super(key: key);
+  const LoginFields({Key? key, required this.type}) : super(key: key);
   final String type;
 
   @override
@@ -61,6 +61,7 @@ class _LoginFieldsState extends State<LoginFields> {
     return [
       widget.type == Rd.registerText
           ? CustomTextField(
+              hintText: '',
               focusNode: _nameFocusNode,
               nextFocusNode: _surnameFocusNode,
               controller: _nameController,
@@ -74,6 +75,7 @@ class _LoginFieldsState extends State<LoginFields> {
       SizedBox(height: 10),
       widget.type == Rd.registerText
           ? CustomTextField(
+              hintText: '',
               focusNode: _surnameFocusNode,
               nextFocusNode: _emailFocusNode,
               controller: _surnameController,
@@ -87,6 +89,7 @@ class _LoginFieldsState extends State<LoginFields> {
       SizedBox(height: 10),
       widget.type == Rd.registerText
           ? CustomTextField(
+              hintText: '',
               focusNode: _emailFocusNode,
               nextFocusNode: _profileFocusNode,
               controller: _emailController,
@@ -114,9 +117,9 @@ class _LoginFieldsState extends State<LoginFields> {
                 height: 2,
                 color: Colors.black,
               ),
-              onChanged: (newValue) {
+              onChanged: (String? newValue) {
                 setState(() {
-                  gender = newValue;
+                  gender = newValue!;
                 });
               },
               items: <String>[
@@ -132,6 +135,7 @@ class _LoginFieldsState extends State<LoginFields> {
           : Opacity(opacity: 0),
       SizedBox(height: 20.0),
       CustomButton(
+        color: Colors.transparent,
         onPressed: () async {
           if (widget.type == Rd.registerText) {
             if (_nameController.text.isNotEmpty &&
@@ -200,8 +204,9 @@ class _LoginFieldsState extends State<LoginFields> {
 
   Widget _buildPasswordTextField() {
     return CustomTextField(
+      hintText: '',
       focusNode: _passwordFocusNode,
-      // nextFocusNode: _passwordFocusNode,
+      nextFocusNode: _passwordFocusNode,
       controller: _passwordController,
       isValid: isValid,
       isLoading: isLoading,

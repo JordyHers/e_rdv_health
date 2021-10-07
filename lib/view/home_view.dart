@@ -1,16 +1,10 @@
-import 'package:e_rdv_health/constants/Strings.dart';
-import 'package:e_rdv_health/models/user_model.dart';
 import 'package:e_rdv_health/utils/config/size_config.dart';
 import 'package:e_rdv_health/utils/routes/routes.dart';
-import 'package:e_rdv_health/utils/widgets/customButton.dart';
-import 'package:e_rdv_health/utils/widgets/custom_appBar.dart';
-import 'package:e_rdv_health/view/rdv_view.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   final String title;
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key? key, required this.title}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -69,14 +63,14 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   buildCard(context, width, height, 'Obtenez un ',
-                      'Rendez-vous', 'hand',RouteNames.rdvFormPage),
+                      'Rendez-vous', 'hand', RouteNames.rdvFormPage),
                   buildCard(context, width, height, 'Consultez la liste',
-                      'de Rendez-vous', 'appointment',RouteNames.rdvListPage),
+                      'de Rendez-vous', 'appointment', RouteNames.rdvListPage),
                 ])));
   }
 
   Widget buildCard(
-      BuildContext context, width, height, title, subtitle, image,routeName) {
+      BuildContext context, width, height, title, subtitle, image, routeName) {
     double fontSize(double size) {
       return size * width / 414;
     }
@@ -99,7 +93,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                      color: Colors.blue[900].withOpacity(0.2),
+                      color: Colors.blue[900]!.withOpacity(0.2),
                       blurRadius: 50,
                       spreadRadius: 2,
                       offset: Offset(20, 0)),
@@ -118,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                      color: Colors.blue[900].withOpacity(0.2),
+                      color: Colors.blue[900]!.withOpacity(0.2),
                       blurRadius: 50,
                       spreadRadius: 2,
                       offset: Offset(20, 0)),

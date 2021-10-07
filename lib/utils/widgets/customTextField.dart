@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:e_rdv_health/constants/Strings.dart';
 
 class CustomTextField extends StatelessWidget {
   final FocusNode focusNode;
@@ -15,17 +14,17 @@ class CustomTextField extends StatelessWidget {
   final bool password;
 
   const CustomTextField(
-      {Key key,
-      this.focusNode,
-      this.nextFocusNode,
-      this.controller,
-      this.isValid,
-      this.isLoading,
-      this.hintText,
-      this.label,
-      this.icon,
+      {Key? key,
+      required this.focusNode,
+      required this.nextFocusNode,
+      required this.controller,
+      required this.isValid,
+      required this.isLoading,
+      required this.hintText,
+      required this.label,
+      required this.icon,
       this.password = false,
-      this.errorText,
+      required this.errorText,
       this.phone = false})
       : super(key: key);
 
@@ -34,10 +33,11 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       focusNode: focusNode,
       controller: controller,
-      textInputAction: password == true ? TextInputAction.done: TextInputAction.next,
+      textInputAction:
+          password == true ? TextInputAction.done : TextInputAction.next,
       // onChanged: (name) => print(name),
       onEditingComplete: () {
-        if (controller.text.isEmpty ) {
+        if (controller.text.isEmpty) {
           FocusScope.of(context).requestFocus(nextFocusNode);
         } else {
           FocusScope.of(context).requestFocus(nextFocusNode);

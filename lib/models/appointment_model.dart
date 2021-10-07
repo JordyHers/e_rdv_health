@@ -6,9 +6,9 @@ class Appointment {
   final String state;
 
   Appointment({
-    this.date,
-    this.hour,
-    this.state,
+    required this.date,
+    required this.hour,
+    required this.state,
   });
 
   factory Appointment.fromJson(Map<dynamic, dynamic> json) {

@@ -1,12 +1,11 @@
 import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/utils/routes/routes.dart';
 import 'package:e_rdv_health/utils/theme/theme.dart';
-import 'package:e_rdv_health/utils/widgets/customButton.dart';
 import 'package:e_rdv_health/utils/widgets/login_fields_component.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

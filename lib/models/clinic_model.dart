@@ -5,10 +5,10 @@ class Clinic {
   final String email;
 
   Clinic({
-    this.name,
-    this.address,
-    this.phone,
-    this.email,
+    required this.name,
+    required this.address,
+    required this.phone,
+    required this.email,
   });
 
   factory Clinic.fromJson(Map<dynamic, dynamic> json) {

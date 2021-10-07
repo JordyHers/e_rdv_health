@@ -12,7 +12,7 @@ class ERdv extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'E-RDV',
       theme: ThemeData(
-          primaryColor: Colors.white,
+          primaryColor: Colors.grey,
           iconTheme: IconThemeData(
             color: Colors.black,
           )),

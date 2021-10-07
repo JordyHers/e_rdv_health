@@ -9,24 +9,24 @@ class User {
   final String password;
 
   User(
-      {this.name,
-      this.address,
-      this.gender,
-      this.phone,
-      this.email,
-      this.password,
-      this.profile,
-      this.surname});
+      {required this.name,
+      required this.address,
+      required this.gender,
+      required this.phone,
+      required this.email,
+      required this.password,
+      required this.profile,
+      required this.surname});
 
   factory User.fromJson(Map<dynamic, dynamic> json) {
-    final String name = json['name'];
-    final String surname = json['surname'];
-    final String gender = json['gender'];
-    final String address = json['address'];
-    final String phone = json['phone'];
-    final String profile = json['profile'];
-    final String email = json['email'];
-    final String password = json['password'];
+    final String name = json['user']['name'];
+    final String surname = json['user']['surname'];
+    final String gender = json['user']['gender'];
+    final String address = json['user']['address'];
+    final String phone = json['user']['phone'];
+    final String profile = json['user']['profile'];
+    final String email = json['user']['email'];
+    final String password = json['user']['password'];
     return User(
         name: name,
         address: address,

@@ -60,6 +60,7 @@ class _LoginFieldsState extends State<LoginFields> {
     super.dispose();
   }
 
+  ///________________________LOGIN FUNCTIONS___________________________
   void _loginUser() async {
     ApiResponse response = (await login(_phoneController.text, _passwordController.text))!;
     if (response.error == null){
@@ -81,6 +82,25 @@ class _LoginFieldsState extends State<LoginFields> {
     // await pref.setInt('userId', user.id ?? 0);
     Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.homePage, (route) => false);
   }
+
+  ///_______________________________________________________________________________________
+  ///
+  ///
+  void _registerUser () async {
+    ApiResponse response = (await register(_nameController.text, _surnameController.text, gender, _emailController.text, _phoneController.text, _passwordController.text,))!;
+    if(response.error == null) {
+      _saveAndRedirectToHome(response.data as User);
+    }
+    else {
+      setState(() {
+        isLoading = !isLoading;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('${response.error}')
+      ));
+    }
+  }
+
 
   List<Widget> _buildChildren(context) {
     return [
@@ -168,6 +188,15 @@ class _LoginFieldsState extends State<LoginFields> {
                 _phoneController.text.isNotEmpty &&
                 _passwordController.text.isNotEmpty &&
                 _emailController.text.isNotEmpty) {
+
+              //Todo: Set up User registration;
+              ///ENABLE REGISTER USER
+              ///
+              //_registerUser();
+              //_saveAndRedirectToHome(user);
+              ///
+              ///
+              ///
               print('The user is ready to be saved in the database as :'
                   ' Name ${_nameController.text}, Surname : ${_surnameController.text} ,Email: ${_phoneController.text} ,');
               // Navigator.pushReplacementNamed(context, RouteNames.homePage);
@@ -184,6 +213,7 @@ class _LoginFieldsState extends State<LoginFields> {
               ///
               ///
               //_loginUser();
+              //_saveAndRedirectToHome(user);
               ///
               ///
               ///

@@ -1,5 +1,6 @@
 import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/view/home_view.dart';
+import 'package:e_rdv_health/view/landing_screen.dart';
 import 'package:e_rdv_health/view/login_page.dart';
 import 'package:e_rdv_health/view/rdv_list_view.dart';
 import 'package:e_rdv_health/view/rdv_view.dart';
@@ -17,6 +18,7 @@ class Routes {
       RouteNames.loginPage: (_) => LoginPage(),
       RouteNames.rdvListPage: (_) => RdvView(),
       RouteNames.rdvFormPage: (_) => RdvForm(),
+      RouteNames.landingPage: (_) => Loading(),
     };
   }
 }
@@ -27,4 +29,5 @@ class RouteNames {
   static final String loginPage = '/login_page';
   static final String rdvListPage = '/rdv_list_view';
   static final String rdvFormPage = '/rdv_view';
+  static final String landingPage= '/landing_screen';
 }

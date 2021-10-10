@@ -1,7 +1,11 @@
 import 'package:e_rdv_health/constants/Strings.dart';
+import 'package:e_rdv_health/models/api_response.dart';
+import 'package:e_rdv_health/models/user_model.dart';
+import 'package:e_rdv_health/service/repository/user_service.dart';
 import 'package:e_rdv_health/utils/routes/routes.dart';
 import 'package:e_rdv_health/utils/widgets/customTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'customButton.dart';
 
@@ -32,7 +36,6 @@ class _LoginFieldsState extends State<LoginFields> {
 
   bool isValid = true;
   bool isLoading = false;
-
   String gender = 'Homme';
 
   ///void Dispose Method
@@ -55,6 +58,28 @@ class _LoginFieldsState extends State<LoginFields> {
     _profileFocusNode.dispose();
 
     super.dispose();
+  }
+
+  void _loginUser() async {
+    ApiResponse response = (await login(_phoneController.text, _passwordController.text))!;
+    if (response.error == null){
+      _saveAndRedirectToHome(response.data as User);
+    }
+    else {
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('${response.error}')
+      ));
+    }
+  }
+
+  void _saveAndRedirectToHome(User user) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    // await pref.setString('token', user.token ?? '');
+    // await pref.setInt('userId', user.id ?? 0);
+    Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.homePage, (route) => false);
   }
 
   List<Widget> _buildChildren(context) {
@@ -155,6 +180,13 @@ class _LoginFieldsState extends State<LoginFields> {
           } else {
             if (_phoneController.text.isNotEmpty &&
                 _passwordController.text.isNotEmpty) {
+              ///ENABLE LOGIN METHOD HERE
+              ///
+              ///
+              //_loginUser();
+              ///
+              ///
+              ///
               Navigator.pushReplacementNamed(context, RouteNames.homePage);
               print('The user is already saved in the database as :'
                   ' Email: ${_phoneController.text} ,');

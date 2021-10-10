@@ -17,7 +17,7 @@ class ERdv extends StatelessWidget {
             color: Colors.black,
           )),
       routes: Routes.getRoute(),
-      initialRoute: RouteNames.loginPage,
+      initialRoute: RouteNames.landingPage,
     );
   }
 }

@@ -134,6 +134,7 @@ class _LoginFieldsState extends State<LoginFields> {
       SizedBox(height: 10),
       widget.type == Rd.registerText
           ? CustomTextField(
+
               hintText: '',
               focusNode: _emailFocusNode,
               nextFocusNode: _profileFocusNode,
@@ -180,6 +181,7 @@ class _LoginFieldsState extends State<LoginFields> {
           : Opacity(opacity: 0),
       SizedBox(height: 20.0),
       CustomButton(
+        key: Key('button'),
         color: Colors.transparent,
         onPressed: () async {
           if (widget.type == Rd.registerText) {
@@ -251,6 +253,7 @@ class _LoginFieldsState extends State<LoginFields> {
 
   Widget _buildPhoneTextField() {
     return CustomTextField(
+      key: Key('phone'),
       focusNode: _phoneFocusNode,
       nextFocusNode: _passwordFocusNode,
       controller: _phoneController,
@@ -266,6 +269,7 @@ class _LoginFieldsState extends State<LoginFields> {
 
   Widget _buildPasswordTextField() {
     return CustomTextField(
+      key: Key('password'),
       hintText: '',
       focusNode: _passwordFocusNode,
       nextFocusNode: _passwordFocusNode,

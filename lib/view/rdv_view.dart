@@ -24,6 +24,13 @@ class _RdvFormState extends State<RdvForm> {
     'HOPITAL MILITAIRE',
     'CHL'
   ];
+  List<Color> colors = [
+    Colors.grey.shade50,
+    Colors.grey.shade50,
+    Colors.grey.shade50,
+    Colors.grey.shade50,
+    Colors.grey.shade50,
+  ];
 
   List<String> branches = [
     'MEDECIN GENERALISTE',
@@ -41,6 +48,7 @@ class _RdvFormState extends State<RdvForm> {
     '16:00 - 17:00'
   ];
   bool isSubmit = false;
+  bool isSelected = false;
 
   //TODO: FETCH THE DATA OF THE CLINIC FROM API and PARSE JSON
   @override
@@ -143,6 +151,9 @@ class _RdvFormState extends State<RdvForm> {
                         ...Iterable<int>.generate(5).map((int index) => InkWell(
                               onTap: () {
                                 setState(() {
+                                  colors[index] == Colors.indigoAccent
+                                      ? colors[index] = Colors.grey.shade50
+                                      : colors[index] = Colors.indigoAccent;
                                   value = hours[index];
                                 });
                                 print('Card tapped');
@@ -150,7 +161,7 @@ class _RdvFormState extends State<RdvForm> {
                               child: Card(
                                 elevation: 10,
                                 child: Container(
-                                  color: Colors.grey.shade50,
+                                  color: colors[index],
                                   height: 55,
                                   child: Center(
                                     child: Text(

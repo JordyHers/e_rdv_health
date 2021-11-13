@@ -1,6 +1,5 @@
 import 'package:e_rdv_health/constants/Strings.dart';
 import 'package:e_rdv_health/models/clinic_model.dart';
-import 'package:e_rdv_health/models/specialities_model.dart';
 import 'package:e_rdv_health/service/database/http_request.dart';
 import 'package:e_rdv_health/utils/config/size_config.dart';
 import 'package:e_rdv_health/utils/exceptions/error_widget.dart';
@@ -20,8 +19,9 @@ class RdvForm extends StatefulWidget {
 class _RdvFormState extends State<RdvForm> {
   String? value;
   String clinic = 'CHAMBRIER';
-  String branch = 'CARDIOLOGIE';
+  String branch = 'OPHTALMOLOGIE';
   List<Clinic>? clinics;
+  List<String>? branches = [];
   List<Color> colors = [
     Colors.grey.shade50,
     Colors.grey.shade50,
@@ -29,8 +29,6 @@ class _RdvFormState extends State<RdvForm> {
     Colors.grey.shade50,
     Colors.grey.shade50,
   ];
-
-  List<Specialities>? branches;
   List<String> hours = [
     '8:00 - 9:00',
     '10:00 - 11:00',
@@ -41,7 +39,6 @@ class _RdvFormState extends State<RdvForm> {
   bool isSubmit = false;
   bool isSelected = false;
 
-  //TODO: FETCH THE DATA OF THE CLINIC FROM API and PARSE JSON
   @override
   void initState() {
     super.initState();
@@ -50,6 +47,7 @@ class _RdvFormState extends State<RdvForm> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<HttpService>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -63,12 +61,9 @@ class _RdvFormState extends State<RdvForm> {
       ),
       body: isSubmit == false
           ? FutureBuilder(
-              future: provider.clinics.then((value) {
-                setState(() {
-                  clinics = value;
-                  branches = provider.parseSpecialities(value);
-                });
-              }),
+              future: Future.wait([
+                provider.clinics.then((List<Clinic> value) => clinics = value)
+              ]),
               builder: (context, _) => Container(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Column(
@@ -128,10 +123,10 @@ class _RdvFormState extends State<RdvForm> {
                           branch = newValue!;
                         });
                       },
-                      items: branches?.map<DropdownMenuItem<String>>((value) {
+                      items: branches!.map<DropdownMenuItem<String>>((value) {
                         return DropdownMenuItem<String>(
-                          value: value.libelle,
-                          child: Text(value.libelle),
+                          value: value,
+                          child: Text(value),
                         );
                       }).toList(),
                     ),

@@ -29,16 +29,30 @@ class Clinic {
     final String email = json['email'];
     final String createdAt = json['created_at'];
     final String updatedAt = json['updated_at'];
-    final List<Specialities>? specialities = json['specialities'];
-    return Clinic(
-        id: id,
-        name: name,
-        address: address,
-        phone: phone,
-        email: email,
-        createdAt: createdAt,
-        updatedAt: updatedAt,
-        specialities: parseSpecialities(specialities ?? [], json));
+    if (json['specialites'] != null) {
+      var specialities = json['specialites'] as List;
+      List<Specialities> spec =
+          specialities.map((e) => Specialities.fromJson(e)).toList();
+      return Clinic(
+          id: id,
+          name: name,
+          address: address,
+          phone: phone,
+          email: email,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+          specialities: spec);
+    } else {
+      return Clinic(
+          id: id,
+          name: name,
+          address: address,
+          phone: phone,
+          email: email,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+          specialities: []);
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -49,19 +63,11 @@ class Clinic {
       'email': email,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
-      'specialities': specialities
+      'specialites': specialities
     };
   }
 
   @override
   String toString() =>
       ' name: $name ,   address:$address, phone: $phone, email: $email,    createdAt: $createdAt, updatedAt: $updatedAt, specialities: $specialities';
-}
-
-parseSpecialities(List<Specialities> specialities, json) {
-  if (specialities.isNotEmpty) {
-    specialities.map<Specialities>((e) => Specialities.fromJson(json)).toList();
-  } else {
-    print(specialities);
-  }
 }
